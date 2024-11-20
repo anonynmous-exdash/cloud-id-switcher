@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud ID Switcher</title>
+
+    <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cloud ID Switcher</h1>
+    <h1 id="noscript">This website requires JavaScript to function!</h1>
+    <div id="contents" style="display:none;">
+        <label for="id">Project ID to switch cloud project ID to</label>
+        <input id="id" placeholder="Project ID" value="489159823" type="number">
+        <p>Selected Project Name: <span id="name">Loading...</span></p>
+        <br>
+        <a id="link">Loading...</a>
+
+        <p>Once you have the bookmarklet, go to your hacked project and wait for it to be fully loaded.</p>
+        <p> Then, click the bookmark. If it succeeded, the cloud ID of the project has been switched and you can now interact with users of your chosen project ID.</p>
+    </div>
+    <a></a>
+    <script>
+        document.getElementById("noscript").style.display = "none"
+        document.getElementById("contents").style.display = "block"
+
+        const link = document.getElementById("link")
+        const idElm = document.getElementById("id")
+        const nameElm = document.getElementById("name")
+        async function UpdateBookmarklet(){
+            let id = idElm.value.toString()
+            let code = `javascript:(async () => {  "Made by anonynmous-exdash  for Maltion. Contact at joeizcooler@gmail.com";   alert("Switching cloud ID");  try {    if (!vm)      var vm = document        .getElementById("app")        ._reactRootContainer._internalRoot.current.child.pendingProps.store.getState()        .scratchGui.vm;    function SwitchCloud(id = ${id}) {      vm.runtime.ioDevices.cloud.provider.projectId = id;      vm.runtime.ioDevices.cloud.provider.connection.close();    }    vm.runtime.ioDevices.cloud.setProvider = function (arg) {      console.log(arg);      if (!arg == null) {        vm.runtime.ioDevices.cloud.provider = arg;        SwitchCloud();      }    };    SwitchCloud();    alert("Succesfully switched cloud ID");  } catch (err) {    console.error(err);    alert(      "Something went wrong when switching cloud ID"    );  }})();`
+            link.textContent = "Drag me to your bookmark bar"
+            link.href = code
+
+            let projectData = await (await fetch("https://corsproxy.io/?"+encodeURI("https://api.scratch.mit.edu/projects/"+id))).json()
+            nameElm.textContent = `"${projectData.title}" by "${projectData.author.username}"`
+        }
+        UpdateBookmarklet()
+
+        idElm.addEventListener("change", UpdateBookmarklet)
+    </script>
+</body>
+</html>
