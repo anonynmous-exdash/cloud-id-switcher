@@ -6,15 +6,29 @@
     <title>Cloud ID Switcher</title>
 
     <style>
+        body{
+            margin:0;
+        }
+        #contents{
+            margin:5px;
+        }
         *{
             font-family: Arial, Helvetica, sans-serif;
+        }
+        footer{
+            position:absolute;
+            bottom:0;
+            background-color:gray;
+            width:100vw;
+            height:4vh
         }
     </style>
 </head>
 <body>
-    <h1>Cloud ID Switcher</h1>
     <h1 id="noscript">This website requires JavaScript to function!</h1>
     <div id="contents" style="display:none;">
+        <h1>Cloud ID Switcher</h1>
+
         <label for="id">Project ID to switch cloud project ID to</label>
         <input id="id" placeholder="Project ID" value="489159823" type="number">
 
@@ -29,8 +43,9 @@
         <p>Once you have the bookmarklet, go to your hacked project and wait for it to be fully loaded.</p>
         <p> Then, click the bookmark. If it succeeded, the cloud ID of the project has been switched and you can now interact with users of your chosen project ID.</p>
     </div>
-    <hr>
-    <a href="https://github.com/anonynmous-exdash/cloud-id-switcher/edit">GitHub</a>
+    <footer>
+        <a href="https://github.com/anonynmous-exdash/cloud-id-switcher/edit">GitHub</a>
+    </footer>
     <script>
         document.getElementById("noscript").style.display = "none"
         document.getElementById("contents").style.display = "block"
