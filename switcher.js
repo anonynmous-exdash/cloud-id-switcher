@@ -2,7 +2,7 @@
 (async () => {
   console.log("%c Switching cloud ID", "font-size:40px;");
   try {
-    if (!vm)
+    if (typeof(vm)=="undefined")
       var vm = document
         .getElementById("app")
         ._reactRootContainer._internalRoot.current.child.pendingProps.store.getState()
